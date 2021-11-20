@@ -2,7 +2,6 @@
 #include <limits.h>
 #include <string.h>
 #include <math.h>
-#include <stdio.h>
 
 #include "base45.h"
 
