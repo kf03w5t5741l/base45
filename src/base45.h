@@ -18,6 +18,7 @@ int Base45_encode(char** dest, char* input, size_t length);
  * 
  * @param dest destination for pointer to decoded output
  * @param input pointer to a char array with Base45-encoded bytes
+ * @param length pointer to store number of written bytes
  * @return 0 if successfull, BASE45_STATUS if unsuccessfull
  */
 int Base45_decode(char** dest, char* input, size_t* length);
