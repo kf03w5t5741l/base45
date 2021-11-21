@@ -19,7 +19,7 @@ static const char charset[] = {
  * @param src Source char array
  * @param size Bytes to encode
  * @param written Pointer to bytes written to destination
- * @return int 
+ * @return int BASE45_STATUS
  */
 static int encode(char* dst, char* src, int size, size_t* written)
 {
@@ -49,7 +49,7 @@ static int encode(char* dst, char* src, int size, size_t* written)
  * @param src Source char array
  * @param size Bytes to decode
  * @param written Pointer to bytes written to destination
- * @return int 
+ * @return int BASE45_STATUS
  */
 static int decode(char* dst, char* src, int size, size_t* written)
 {
@@ -117,7 +117,7 @@ int Base45_encode(char** dest, char* input, size_t length)
             &written
         );
 
-        if (encode_status != 0) {
+        if (encode_status != BASE45_OK) {
             free(*dest);
             *dest = NULL;
             return encode_status;
@@ -178,7 +178,7 @@ int Base45_decode(char** dest, char* input, size_t* length)
             &written
         );
 
-        if (decode_status != 0) {
+        if (decode_status != BASE45_OK) {
             free(*dest);
             *dest = NULL;
             *length = 0;
