@@ -4,7 +4,7 @@ A simple Base45 library in C.
 
 For details on the Base45 specification, see here: https://datatracker.ietf.org/doc/draft-faltstrom-base45/.
 
-# Usage
+## Usage
 
     #include <string.h>
     
