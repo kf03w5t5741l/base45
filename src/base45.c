@@ -32,6 +32,8 @@ enum BASE45_STATUS {
  */
 static int encode(char* dst, char* src, int size, size_t* written)
 {
+    *written = 0;
+
     unsigned int sum = 0;
     for (int i = 0; i < size; i++) {
         unsigned char c = src[size - i - 1];
