@@ -35,7 +35,7 @@ int main()
 ## Build instructions
 Requires CMake.
 
-    $ git clone https://github.com/kf03w5t5741l/base45.git
+    $ git clone https://github.com/kf03w5t5741l/libbase45.git
     $ cd base45
     $ mkdir build
     $ cd build
