@@ -12,14 +12,6 @@ static const char charset[] = {
     ' ', '$', '%', '*', '+', '-', '.', '/', ':'
 };
 
-enum BASE45_STATUS {
-    BASE45_OK,
-    BASE45_INVALID_LENGTH,
-    BASE45_INVALID_CHAR,
-    BASE45_INVALID_VALUE,
-    BASE45_CALLOC_ERROR
-};
-
 /**
  * @brief Encode a set of raw bytes in Base45
  * 
@@ -47,7 +39,7 @@ static int encode(char* dst, char* src, int size, size_t* written)
         i++;
     }
 
-    return 0;
+    return BASE45_OK;
 }
 
 /**
@@ -88,7 +80,7 @@ static int decode(char* dst, char* src, int size, size_t* written)
         sum %= (unsigned int) pow(256, power);
         (*written)++;        
     }
-    return 0;
+    return BASE45_OK;
 }
 
 int Base45_encode(char** dest, char* input, size_t length)
@@ -99,7 +91,7 @@ int Base45_encode(char** dest, char* input, size_t length)
     );
 
     if (output == NULL) {
-        return BASE45_CALLOC_ERROR;
+        return BASE45_MEMORY_ERROR;
     }
     *dest = output;
 
@@ -126,6 +118,8 @@ int Base45_encode(char** dest, char* input, size_t length)
         );
 
         if (encode_status != 0) {
+            free(*dest);
+            *dest = NULL;
             return encode_status;
         }
 
@@ -140,12 +134,12 @@ int Base45_encode(char** dest, char* input, size_t length)
         i += size;
     }
 
-    return 0;
+    return BASE45_OK;
 }
 
-int Base45_decode(char** dest, char* input, size_t* p_length)
+int Base45_decode(char** dest, char* input, size_t* length)
 {
-    *p_length = 0;
+    *length = 0;
 
     char* output = calloc(
         strlen(input) / 3 * 2 + strlen(input) % 3 / 2 + 1,
@@ -153,7 +147,7 @@ int Base45_decode(char** dest, char* input, size_t* p_length)
     );
 
     if (output == NULL) {
-        return BASE45_CALLOC_ERROR;
+        return BASE45_MEMORY_ERROR;
     }
     *dest = output;
 
@@ -169,25 +163,31 @@ int Base45_decode(char** dest, char* input, size_t* p_length)
         } else if (strlen(input) - i == 2) {
             size = 2;
         } else {
+            free(*dest);
+            *dest = NULL;
+            *length = 0;
             return BASE45_INVALID_LENGTH;
         }
 
         size_t written = 0;
 
         int decode_status = decode(
-            *dest + *p_length,
+            *dest + *length,
             input + i,
             size,
             &written
         );
 
         if (decode_status != 0) {
+            free(*dest);
+            *dest = NULL;
+            *length = 0;
             return decode_status;
         }
 
-        *p_length += written;
+        *length += written;
         i += size;
     }
 
-    return 0;
+    return BASE45_OK;
 }
