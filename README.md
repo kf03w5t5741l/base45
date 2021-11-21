@@ -22,7 +22,7 @@ For details on the Base45 specification, see here: https://datatracker.ietf.org/
         size_t written = 0;
         Base45_decode(&decoded, encoded, &written);
 
-        int match = memcmp(input, decoded, strlen(input)i);
+        int match = memcmp(input, decoded, strlen(input));
 
         free(encoded);
         free(decoded);
