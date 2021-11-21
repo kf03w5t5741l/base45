@@ -1,4 +1,4 @@
-# Base45
+# libbase45
 
 A simple Base45 library in C.
 
