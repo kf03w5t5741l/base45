@@ -1,8 +1,6 @@
 #ifndef BASE45_H
 #define BASE45_H
 
-#include <stdbool.h>
-
 /**
  * @brief Encode data as Base45
  * 
