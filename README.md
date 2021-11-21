@@ -36,7 +36,7 @@ int main()
 Requires CMake.
 
     $ git clone https://github.com/kf03w5t5741l/libbase45.git
-    $ cd base45
+    $ cd libbase45
     $ mkdir build
     $ cd build
     $ cmake ..
