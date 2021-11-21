@@ -6,7 +6,7 @@ For details on the Base45 specification, see here: https://datatracker.ietf.org/
 
 ## Usage
 
-```
+```c
 #include <string.h>
 
 #include "base45.h"
