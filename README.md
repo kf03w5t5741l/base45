@@ -6,29 +6,31 @@ For details on the Base45 specification, see here: https://datatracker.ietf.org/
 
 ## Usage
 
-    #include <string.h>
-    
-    #include "base45.h"
+```
+#include <string.h>
 
-    int main()
-    {
-        char input[] = "abcd123";
+#include "base45.h"
 
-        char* encoded = NULL;
-        Base45_encode(&encoded, input, strlen(input));
+int main()
+{
+    char input[] = "abcd123";
+
+    char* encoded = NULL;
+    Base45_encode(&encoded, input, strlen(input));
 
 
-        char* decoded = NULL;
-        size_t written = 0;
-        Base45_decode(&decoded, encoded, &written);
+    char* decoded = NULL;
+    size_t written = 0;
+    Base45_decode(&decoded, encoded, &written);
 
-        int match = memcmp(input, decoded, strlen(input));
+    int match = memcmp(input, decoded, strlen(input));
 
-        free(encoded);
-        free(decoded);
+    free(encoded);
+    free(decoded);
 
-        return match;
-    }
+    return match;
+}
+```
 
 ## Build instructions
 Requires CMake.
